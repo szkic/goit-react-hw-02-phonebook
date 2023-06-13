@@ -16,6 +16,15 @@ export class App extends Component {
   };
 
   addNewName = (name, number) => {
+    const { contacts } = this.state;
+
+    const contactNames = contacts.map(contact => {
+      return contact.name;
+    });
+
+    if (contactNames.includes(name))
+      return alert(`${name} is alredy in contacts`);
+
     this.setState(prevState => ({
       contacts: [...prevState.contacts, { id: nanoid(), name, number }],
     }));
