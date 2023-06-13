@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-export class Form extends Component {
+export class ContactForm extends Component {
   state = {
     name: '',
     number: '',
@@ -13,9 +13,7 @@ export class Form extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-
-    const name = this.state.name;
-    const number = this.state.number;
+    const { name, number } = this.state;
 
     this.props.onSubmit(name, number);
 
@@ -27,8 +25,6 @@ export class Form extends Component {
 
     return (
       <div>
-        <h1>Phonebook</h1>
-
         <form onSubmit={this.handleSubmit}>
           <label>
             Name
