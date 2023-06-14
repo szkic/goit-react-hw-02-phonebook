@@ -10,9 +10,6 @@ export class ContactList extends Component {
   };
 
   render() {
-    // let { contacts, filter } = this.props;
-    // if (filter !== '') contacts = filter;
-
     const { contacts } = this.props;
 
     return (
