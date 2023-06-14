@@ -1,8 +1,10 @@
 import { Component } from 'react';
+import css from './ContactList.module.css';
+import PropTypes from 'prop-types';
 
 export class ContactList extends Component {
-  handleDelete = e => {
-    const { value } = e.target;
+  handleDelete = id => {
+    const { value } = id.target;
 
     this.props.onClick(value);
   };
@@ -16,12 +18,13 @@ export class ContactList extends Component {
         <ul>
           {contacts.map(contact => {
             return (
-              <li key={contact.id}>
+              <li key={contact.id} className={css.listEl}>
                 {contact.name}: {contact.number}
                 <button
                   type="submit"
                   value={contact.id}
                   onClick={this.handleDelete}
+                  className={css.delBtn}
                 >
                   Delete
                 </button>
@@ -33,3 +36,7 @@ export class ContactList extends Component {
     );
   }
 }
+
+ContactList.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
