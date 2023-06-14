@@ -31,14 +31,12 @@ export class App extends Component {
     }));
   };
 
-  showFilteredContacts = value => {
-    const { contacts } = this.state;
+  showFilteredContacts = () => {
+    const { contacts, filter } = this.state;
 
-    this.setState({
-      filter: contacts.filter(els => {
-        return els.name.toLowerCase().includes(value.toLowerCase());
-      }),
-    });
+    return contacts.filter(con =>
+      con.name.toLowerCase().includes(filter.toLowerCase())
+    );
   };
 
   deleteContact = id => {
@@ -49,6 +47,12 @@ export class App extends Component {
     });
   };
 
+  handleFilterChange = newValue => {
+    this.setState({
+      filter: newValue,
+    });
+  };
+
   render() {
     return (
       <div className={css.container}>
@@ -56,8 +60,11 @@ export class App extends Component {
         <ContactForm onSubmit={this.addNewName} />
 
         <h2 className={css.title}>Contacts</h2>
-        <Filter onChange={this.showFilteredContacts} />
-        <ContactList data={this.state} onClick={this.deleteContact} />
+        <Filter onChange={this.handleFilterChange} />
+        <ContactList
+          contacts={this.showFilteredContacts()}
+          onClick={this.deleteContact}
+        />
       </div>
     );
   }
